@@ -23,11 +23,10 @@ router.post('/',async (req,res)=>{
     //authentication to be made
     const username=req.body.name;
        const new_user=new Users({
-          name:{
-          "name":"req.body.name",
+          name:req.body.name,
           password:req.body.password,
           email:req.body.email,
-          role:req.body.role}
+          role:req.body.role
     });
     try{
        const saveduser=await new_user.save();
