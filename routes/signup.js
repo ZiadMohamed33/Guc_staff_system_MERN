@@ -1,6 +1,7 @@
 const express=require('express');
 const router = express.Router();
 const Users=require('../models/Users');
+const bcrypt = require('bcrypt');
 
 
 
@@ -21,7 +22,8 @@ router.post('/',async (req,res)=>{
 
 
     //authentication to be made
-    const username=req.body.name;
+    const salt = await bcrypt.genSalt(10);
+    req.body.password = await bcrypt.hash(req.body.password, salt);
        const new_user=new Users({
           name:req.body.name,
           password:req.body.password,
