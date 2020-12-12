@@ -11,22 +11,23 @@ router.get('/',(req,res)=>{
 
 
 //signup
-router.post('/signup',async (req,res)=>{
+router.post('/',async (req,res)=>{
 
-    const {email, password} = req.body
+ //   const {email, password} = req.body
    // TODO Validate the inputs required exist
   
-   const user = await userModel.findOne({email: email});
+ //  const user = await userModel.findOne({email: email});
    // TODO What if user not existing in database
 
 
     //authentication to be made
     const username=req.body.name;
        const new_user=new Users({
-          name:req.body.name,
+          name:{
+          "name":"req.body.name",
           password:req.body.password,
           email:req.body.email,
-          role:req.body.role
+          role:req.body.role}
     });
     try{
        const saveduser=await new_user.save();
