@@ -4,13 +4,19 @@ const userModel=require('../models/Users');
 const bcrypt = require('bcrypt');
 //jwt
 const jwt=require('jsonwebtoken');
+const Users = require('../models/Users');
 router.use(express.json());
 require('dotenv').config()
 //check login page status
 
-router.get('/',(req,res)=>{
-    res.send("login page");
+router.get('/test',auth_Token,async(req,res)=>{
+    const user = await userModel.findOne({email: req.user.name});
+res.json(user)
+    
+    //res.send("login page");
     });
+
+    
  
     router.route('/').post(async(req, res) => {
         const {email, password} = req.body
@@ -49,14 +55,24 @@ router.get('/',(req,res)=>{
    // res.send('Logged In!');
    })
  
+
+   
    
 //authinticate
-router.use(async (req, res, next) => {
+
+function auth_Token(req, res, next) {
     const token = req.headers.token;
+    if (token==null){
+           return res.sendStatus(401)
+       }
     // TODO deny access if token does not exist
-    req.user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    req.user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
+           if(err) return res.sendStatus(403)
+           req.user=user
+    });
+       
     next();
-   });
+   }
    
 
 module.exports=router;
