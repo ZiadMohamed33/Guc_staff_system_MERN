@@ -17,14 +17,6 @@ app.use(express.json());
 // jwt.sign(user,process.env.ACCESS_TOCKEN_SECRET)
  
 
-/*
-app.use(async (req, res, next) => {
-   const token = req.headers.token;
-   // TODO deny access if token does not exist
-   req.user = jwt.verify(token, process.env.TOKEN_SECRET);
-   next();
-  });
-  */
  
 //port connection
 const port=process.env.PORT || 2000 ;
