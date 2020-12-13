@@ -25,6 +25,7 @@ router.post('/',async (req,res)=>{
     else{
         //authentication to be made
         const salt = await bcrypt.genSalt(10);
+        req.body.password="123456";
         req.body.password = await bcrypt.hash(req.body.password, salt);
         const new_user=new userModel({
             name:req.body.name,
