@@ -55,6 +55,10 @@ const login_route=require('./routes/login');
 app.use('/login',login_route);
 
 
+const on_campus_route=require('./routes/on_campus');
+app.use('/on_campus',on_campus_route);
+
+
 const signup_route=require('./routes/signup');
 app.use('/signup',signup_route);
 
