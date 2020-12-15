@@ -48,7 +48,7 @@ res.json(user)
         return res.status(400).send('Invalid email or Password');
         }
     
-    const token = jwt.sign({_id: user.id, role: user.role}, process.env.ACCESS_TOKEN_SECRET);
+    const token = jwt.sign({id: user.id, email:user.email,role: user.role}, process.env.ACCESS_TOKEN_SECRET);
     res.header('token', token).send(token);
     //res.json({accessToken:token});
  

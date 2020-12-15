@@ -31,7 +31,9 @@ router.post('/',async (req,res)=>{
             name:req.body.name,
             password:req.body.password,
             email:req.body.email,
-            role:req.body.role
+            role:req.body.role,
+            gender:req.body.gender,
+            id:req.body.id
         });
         try{
         const saveduser=await new_user.save();
