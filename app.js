@@ -62,6 +62,23 @@ app.use('/on_campus',on_campus_route);
 const signup_route=require('./routes/signup');
 app.use('/signup',signup_route);
 
+const sign_out_route = require('./routes/sign_out');
+app.use('/sign_out',sign_out_route);
+
+const sign_in = require('./routes/sign_in');
+app.use('/sign_in',sign_in);
+
+const update_profile = require('./routes/update_profile');
+app.use('/update_profile',update_profile);
+
+const view_attendance = require('./routes/view_attendance');
+app.use('/view_attendance',view_attendance);
+
+const view_profile = require('./routes/view_profile');
+app.use('/view_profile',view_profile);
+
+const reset_password = require('./routes/reset_password');
+app.use('/reset_password',reset_password);
 
 //check server status
 app.get('/',(req,res)=>{
