@@ -26,6 +26,8 @@ console.log(`listening on port ${port}`);
 
 
 //db connect
+require('dotenv').config()
+
 const mongoose =require('mongoose');
 const connectionParams={
    useNewUrlParser: true,
@@ -34,7 +36,7 @@ const connectionParams={
 }
 app.use(express.urlencoded({extended:false}));
 
-const URL = "mongodb+srv://zizo33:19989898@cluster0.hfmnd.mongodb.net/Stalin?retryWrites=true&w=majority";
+const URL = process.env.DB_URL;
 mongoose.connect(URL,connectionParams).then(()=>{
    console.log("Db connection succesfull");
 }).catch(()=>{
@@ -65,6 +67,23 @@ app.use('/signup',signup_route);
 
 const leave_route=require('./routes/leave');
 app.use('/leave',leave_route);
+
+
+const sign_in = require('./routes/sign_in');
+app.use('/sign_in',sign_in);
+
+
+const view_profile = require('./routes/view_profile');
+app.use('/view_profile',view_profile);
+
+const view_attendance = require('./routes/view_attendance');
+app.use('/view_attendance',view_attendance);
+
+const reset_password = require('./routes/reset_password');
+app.use('/reset_password',reset_password);
+
+const update_profile = require('./routes/update_profile');
+app.use('/update_profile',update_profile);
 
 //check server status
 app.get('/',(req,res)=>{
