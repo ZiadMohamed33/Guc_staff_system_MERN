@@ -8,9 +8,11 @@ const att_data = mongoose.Schema( {
 
 const attendance = mongoose.Schema({
     id:{type: String, required: true},
+    day_off : {type: String},
     Date: { type: Date, default: Date.now },
     att_data:[att_data],
-    hours_spent: {type:Number , default: "0"}
+    minutes_spent: {type:Number , default: "0"},
+    monthly_minutes_spent : {type:Number , default: "0"}
 });
 
 
