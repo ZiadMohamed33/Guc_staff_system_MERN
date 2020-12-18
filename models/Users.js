@@ -15,6 +15,8 @@ const UserSchema=mongoose.Schema({
         type: String, required: true,
         }, gender:{
         type: String, required: true,
+        }, annual_leaves : {
+        type: Number, min: 0, default: 0
         }
 
        

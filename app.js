@@ -63,6 +63,9 @@ const signup_route=require('./routes/signup');
 app.use('/signup',signup_route);
 
 
+const leave_route=require('./routes/leave');
+app.use('/leave',leave_route);
+
 //check server status
 app.get('/',(req,res)=>{
    res.send("We are online");
