@@ -1,0 +1,27 @@
+const express=require('express');
+const router = express.Router();
+const userModel=require('../models/Users');
+const bcrypt = require('bcrypt');
+const jwt=require('jsonwebtoken');
+const Users = require('../models/Users');
+const attendance = require('../models/attendance');
+router.use(express.json());
+require('dotenv').config()
+
+
+router.route('/').get(async(req, res) => {
+ const id = req.body.id;
+ //bygeeb a5r record fe attendance table
+ const last_attend = attendance.find({id: id}).sort({ createdAt: -1 }).limit(1);
+ if (last_attend.att_data[0]){
+const attended = new attendance({
+    id : req.body.id,
+    att_data : [Date = new Date() , signed_In=false],
+})
+ }
+ const test = attendance.find()
+ console.log("test")
+
+    
+});
+module.exports=router;

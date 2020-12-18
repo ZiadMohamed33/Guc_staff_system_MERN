@@ -1,0 +1,33 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "devStart": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guc-met/milestone-1-team-29.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guc-met/milestone-1-team-29/issues"
+  },
+  "homepage": "https://github.com/guc-met/milestone-1-team-29#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "env": "0.0.2",
+    "express": "^4.17.1",
+    "jest": "^26.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.6",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
+  },
+  "keywords": [],
+  "description": "��#\u0000 \u0000m\u0000i\u0000l\u0000e\u0000s\u0000t\u0000o\u0000n\u0000e\u0000-\u00001\u0000-\u0000t\u0000e\u0000a\u0000m\u0000-\u00002\u00009\u0000\r\u0000 \u0000",
+  "devDependencies": {}
+}
