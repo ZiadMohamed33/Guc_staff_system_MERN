@@ -10,7 +10,11 @@ const connectionOptions = {
   useNewUrlParser: true,
 };
 
-mongoose.connect(DB_URL, connectionOptions);
+mongoose.connect(DB_URL, connectionOptions).then(()=>{
+  console.log("Db connection succesfull");
+}).catch(()=>{
+  console.log("DB connection failed");
+})
 date = new Date()
 curMonth = date.getFullYear()
 console.log (curMonth)

@@ -14,10 +14,15 @@ router.route('/').get(async(req, res) => {
  //bygeeb a5r sign in
  const last_attend = attendance.find({id: id}).sort({ createdAt: -1 }).limit(1);
  if (!last_attend.att_data.signed_In){
+     if(express=express){
 const attended = new attendance({
     id : req.body.id,
-    att_data : [ signed_In=true],
+    att_data : [ signed_In=true]
+    
+   
 })
+       await attended.save()
+}
  }
 
 
