@@ -1,4 +1,5 @@
-
+//initiate db connection and port
+const server = require('./server')
 
 //expresss
 const express=require('express');
@@ -10,44 +11,16 @@ app.use(bodyParser.json());
 
 //jwt
 const jwt=require('jsonwebtoken');
-app.use(express.json());
+app.use(express.json());  
 
 
-  
-// jwt.sign(user,process.env.ACCESS_TOCKEN_SECRET)
- 
-
- 
-//port connection
-const port=process.env.PORT || 2000 ;
-app.listen(port,()=>{
-console.log(`listening on port ${port}`);
-});
-
-
-//db connect
-require('dotenv').config()
-
-const mongoose =require('mongoose');
-const connectionParams={
-   useNewUrlParser: true,
-   useCreateIndex: true,
-   useUnifiedTopology: true 
-}
-app.use(express.urlencoded({extended:false}));
-
-const URL = process.env.DB_URL;
-mongoose.connect(URL,connectionParams).then(()=>{
-   console.log("Db connection succesfull");
-}).catch(()=>{
-   console.log("DB connection failed");
-});
 
 
 //middlewares
 
 const Users = require('./models/Users');
 
+const attendance =require('./models/attendance');
 
 const router=require('./routes/Users');
 app.use('/Users',router);
@@ -59,6 +32,7 @@ app.use('/login',login_route);
 
 const on_campus_route=require('./routes/on_campus');
 app.use('/on_campus',on_campus_route);
+
 
 
 const signup_route=require('./routes/signup');

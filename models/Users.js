@@ -20,6 +20,9 @@ const UserSchema=mongoose.Schema({
         },accidental_leaves : {
         type: Number, min: 0, default: 6, max: 6
         }
+        ,salary :{
+                type: Number , required:true
+        }
 
        
 });

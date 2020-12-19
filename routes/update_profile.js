@@ -4,6 +4,7 @@ const userModel=require('../models/Users');
 const bcrypt = require('bcrypt');
 const jwt=require('jsonwebtoken');
 router.use(express.json());
+require('dotenv').config()
 
 
 router.route('/').put(async(req, res) => {
