@@ -1,25 +1,18 @@
-//initiate db connection and port
 
 //expresss
 const express=require('express');
 const app =express();
-
 //3ashan n2ra elposts
 const bodyParser=require("body-parser");
 app.use(bodyParser.json());
-
 //jwt
 const jwt=require('jsonwebtoken');
 app.use(express.json());  
-
-
+ 
 
 
 //middlewares
 
-const Users = require('./models/Users');
-
-const attendance =require('./models/attendance');
 
 const router=require('./routes/Users');
 app.use('/Users',router);
@@ -27,11 +20,6 @@ app.use('/Users',router);
 
 const login_route=require('./routes/login');
 app.use('/login',login_route);
-
-
-const on_campus_route=require('./routes/on_campus');
-app.use('/on_campus',on_campus_route);
-
 
 
 const signup_route=require('./routes/signup');

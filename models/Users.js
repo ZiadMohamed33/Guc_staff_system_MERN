@@ -21,7 +21,7 @@ const UserSchema=mongoose.Schema({
         type: Number, min: 0, default: 6, max: 6
         }
         ,salary :{
-                type: Number 
+        type: Number 
         }
 
        
