@@ -19,6 +19,10 @@ const leaveSchema = new mongoose.Schema({
     endDay:{
         type: Date,
         default: function (){return this.startDay;}
+    },
+    accepted:{
+        type: Boolean,
+        default: false
     }
 });
 

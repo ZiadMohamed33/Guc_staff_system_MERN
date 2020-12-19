@@ -14,9 +14,11 @@ const UserSchema=mongoose.Schema({
         }, id:{
         type: String, required: true,
         }, gender:{
-        type: String, required: true,
+        type: String, required: true, enum:['Female','Male']
         }, annual_leaves : {
         type: Number, min: 0, default: 0
+        },accidental_leaves : {
+        type: Number, min: 0, default: 6, max: 6
         }
 
        
