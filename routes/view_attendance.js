@@ -6,6 +6,9 @@ const Users = require('../models/Users');
 const attendance = require('../models/attendance');
 router.use(express.json());
 
+router.get('/',(req,res)=>{
+    res.json("We are online");
+    });
 
 router.route('/').post(async(req, res) => {
  const id = req.body.id;

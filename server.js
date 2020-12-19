@@ -1,7 +1,8 @@
 const express = require('express');
-const app = express();
+const app = require('./app');
 require('dotenv').config();
 const mongoose = require('mongoose');
+
 const  DEV_PORT  = process.env.DEV_PORT;
 const  DB_URL  = process.env.DB_URL;
 console.log (DB_URL)
@@ -22,3 +23,7 @@ console.log (curMonth)
 app.listen(DEV_PORT, () => {
   console.log(`[+] Server has started: http://localhost:${DEV_PORT}/`);
 });
+
+/*app.get('/',(req,res)=>{
+  res.json("We are online");
+  });*/

@@ -1,5 +1,4 @@
 //initiate db connection and port
-const server = require('./server')
 
 //expresss
 const express=require('express');
@@ -61,6 +60,7 @@ app.use('/update_profile',update_profile);
 
 //check server status
 app.get('/',(req,res)=>{
-   res.send("We are online");
+   res.json("We are online");
    });
 
+      module.exports=app;
