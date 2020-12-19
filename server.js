@@ -16,14 +16,8 @@ mongoose.connect(DB_URL, connectionOptions).then(()=>{
 }).catch(()=>{
   console.log("DB connection failed");
 })
-date = new Date()
-curMonth = date.getFullYear()
-console.log (curMonth)
 
 app.listen(DEV_PORT, () => {
   console.log(`[+] Server has started: http://localhost:${DEV_PORT}/`);
 });
 
-/*app.get('/',(req,res)=>{
-  res.json("We are online");
-  });*/
