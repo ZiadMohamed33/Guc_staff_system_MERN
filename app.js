@@ -47,7 +47,7 @@ const update_profile = require('./routes/update_profile');
 app.use('/update_profile',update_profile);
 
 const newlocation = require('./routes/hr_location');
-app.use('/hr_location',newlocation);
+app.use('/hr_location/',newlocation);
 
 //check server status
 app.get('/',(req,res)=>{
