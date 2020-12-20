@@ -8,6 +8,7 @@ console.log (DB_URL)
 const connectionOptions = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  useCreateIndex:true
 };
 
 mongoose.connect(DB_URL, connectionOptions).then(()=>{

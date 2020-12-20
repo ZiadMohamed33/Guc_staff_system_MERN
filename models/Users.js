@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const { scheduleSchema } = require('./schedule');
 
 const UserSchema=mongoose.Schema({
         name: {
@@ -12,7 +13,7 @@ const UserSchema=mongoose.Schema({
         }, age:  {
         type: Number, min: 18, max: 90 
         }, id:{
-        type: String, required: true,
+        type: String, required: true, unique: true
         }, gender:{
         type: String, required: true, enum:['Female','Male']
         }, annual_leaves : {
@@ -22,7 +23,7 @@ const UserSchema=mongoose.Schema({
         }
         ,salary :{
         type: Number 
-        }
+        }, schedule : scheduleSchema
 
        
 });

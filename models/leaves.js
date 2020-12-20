@@ -5,7 +5,8 @@ Joi.objectId = require('joi-objectid')(Joi);
 const leaveSchema = new mongoose.Schema({
     userId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        ref: 'Users',
+        required: true
     },
     leaveType: {
         type: String,
