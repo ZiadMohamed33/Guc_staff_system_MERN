@@ -19,4 +19,4 @@ const facultySchema = new mongoose.Schema({
 
 const Faculty = mongoose.model('Faculty',facultySchema);
 
-module.exports.Faculty = Faculty;
+module.exports = Faculty;

@@ -30,4 +30,4 @@ const coursesSchema = new mongoose.Schema({
 
 const Course = mongoose.model('Course', coursesSchema);
 
-module.exports.Course = Course;
+module.exports = Course;

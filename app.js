@@ -49,6 +49,15 @@ app.use('/update_profile',update_profile);
 const hr_location = require('./routes/hr_location');
 app.use('/hr_location',hr_location);
 
+const hr_faculty = require('./routes/hr_faculty');
+app.use('/hr_faculty',hr_faculty);
+
+const hr_department = require('./routes/hr_department');
+app.use('/hr_department',hr_department);
+
+const hr_course = require('./routes/hr_course');
+app.use('/hr_course',hr_course);
+
 //check server status
 app.get('/',(req,res)=>{
    res.json("We are online");
