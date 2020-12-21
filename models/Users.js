@@ -20,6 +20,8 @@ const UserSchema=mongoose.Schema({
         type: String, required: true, unique: true
         }, gender:{
         type: String, required: true, enum:['Female','Male']
+        },day_off : {
+        type: String
         }, annual_leaves : {
         type: Number, min: 0, default: 0
         },accidental_leaves : {
