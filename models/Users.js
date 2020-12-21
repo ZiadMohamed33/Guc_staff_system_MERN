@@ -1,5 +1,9 @@
 const mongoose=require('mongoose');
 const { scheduleSchema } = require('./schedule');
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
+
+
 
 const UserSchema=mongoose.Schema({
         name: {
@@ -29,4 +33,20 @@ const UserSchema=mongoose.Schema({
 });
 
 
+function validateUsers(Users){
+        const schema = Joi.object({
+            id: Joi.string().required(),
+            name: Joi.string().required(),
+            email: Joi.string().required(),
+            role: Joi.boolean().required(),
+            gender: Joi.string().required(),
+
+
+
+        });
+        return schema.validate(Users);
+    }
+    
+    
 module.exports=mongoose.model("Users",UserSchema);
+module.exports.validateUsers = validateUsers;
