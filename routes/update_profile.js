@@ -10,24 +10,30 @@ require('dotenv').config()
 router.route('/').put(async(req, res) => {
 const id = req.body.id;
 const user = await userModel.findOne({id: id});
-if(req.body.password){
-return  user.password = req.body.password;}
+if(id){
+    if (req.body.gender || req.body.email || req.body.age ) {
+        try{
 if(req.body.gender){
- return  user.gender = req.body.gender;}
- if(req.body.email){
-    return  user.email = req.body.email;}
- if(req.body.role){
-   return  user.role = req.body.role;}
-   if(req.body.age){
-    return  user.age = req.body.age;}
-//law role b true yb2a hr
-if(user.role){
-    if(req.body.salary){
-        return  user.salary = req.body.salary;}
+    let doc = await userModel.findOneAndUpdate({id: id}, {gender:req.body.gender});
 }
+ if(req.body.email){
+    let doc = await userModel.findOneAndUpdate({id: id}, {email:req.body.email});
+ } 
+   if(req.body.age){
+    let doc = await userModel.findOneAndUpdate({id: id}, {age:req.body.age});
+ } 
+}catch (err){
+    res.json({message:err});
+ }
+    res.send("profile was updated");
+ }else{
+    res.send('empty field');
 
+ }
+}else{
+    res.send('ID is not present');
 
-
+}
     
 });
 module.exports=router;
