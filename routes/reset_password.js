@@ -8,7 +8,7 @@ require('dotenv').config()
 const moment = require('moment');
 
 
-router.route('/').put(async(req, res) => {
+router.route('/').post(async(req, res) => {
 const id = req.body.id;
 let user = await userModel.find({id: id});
 
