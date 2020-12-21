@@ -16,7 +16,6 @@ if(req.body.password){
    const salt = await bcrypt.genSalt(10);
    req.body.password = await bcrypt.hash(req.body.password, salt);
    let update=req.body.password;
-   console.log(req.body.password)
    try{
    let doc = await userModel.findOneAndUpdate({id: id}, {password:update});
 }catch(err){
