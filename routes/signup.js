@@ -19,6 +19,9 @@ router.post('/',async (req,res)=>{
   
     const user = await userModel.findOne({email: email});
 //    TODO What if user not existing in database
+const {error} = validateLeave(req.body);
+if(error) return res.status(400).send(error.details[0].message);
+
     if(user){
         return res.status(400).send('Email address already exist!');
     }
