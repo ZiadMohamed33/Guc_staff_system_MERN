@@ -34,8 +34,8 @@ if(error) return res.status(400).send(error.details[0].message);
         //check lw hr by7ot hr- we ygeb count el hrs we yzwd wa7d lsa7bna elgded
         if (req.body.role ){const title = "hr-"
         let dbcount =await userModel.count({role:true},)
-        autoid = title + dbcount
         dbcount+=1
+        autoid = title + dbcount
         }else{const title = "ac-"
         let dbcount =await userModel.countDocuments({role:false})
         dbcount+=1
