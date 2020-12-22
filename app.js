@@ -62,6 +62,9 @@ app.use('/hr_department',hr_department);
 const hr_course = require('./routes/hr_course');
 app.use('/hr_course',hr_course);
 
+const hr_rest = require('./routes/hr_rest');
+app.use('/hr_rest',hr_rest);
+
 //check server status
 app.get('/',(req,res)=>{
    res.json("We are online");

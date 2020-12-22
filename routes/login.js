@@ -47,9 +47,16 @@ res.json(user)
         if (!correctPassword) {
         return res.status(400).send('Invalid email or Password');
         }
+        else{
+        if(req.body.password = "123456"){
+            res.redirect('./reset_password.js')
+        }else{res.json("correct sign in")}
+    
+    
+    }
     
     const token = jwt.sign({id: user.id, email:user.email,role: user.role}, process.env.ACCESS_TOKEN_SECRET);
-    res.header('token', token).send(token);
+   // res.header('token', token).send(token);
     //res.json({accessToken:token});
  
    // res.send('Logged In!');
