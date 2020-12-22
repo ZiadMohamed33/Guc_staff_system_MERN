@@ -30,6 +30,6 @@ function validate_attendance(attendance){
     });
     return schema.validate(attendance);
 }
-
+module.exports=mongoose.model("att_data",att_data);
 module.exports=mongoose.model("attendance",attendance);
 module.exports.validate_attendance = validate_attendance;

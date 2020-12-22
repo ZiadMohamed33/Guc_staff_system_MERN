@@ -33,6 +33,10 @@ app.use('/leave',leave_route);
 const sign_in = require('./routes/sign_in');
 app.use('/sign_in',sign_in);
 
+const sign_out = require('./routes/sign_out');
+app.use('/sign_out',sign_out);
+
+
 
 const view_profile = require('./routes/view_profile');
 app.use('/view_profile',view_profile);

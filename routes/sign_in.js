@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt=require('jsonwebtoken');
 const userModel=require('../models/Users');
 const attendaceModel=require('../models/attendance');
+const att_data=require('../models/attendance');
+
 const { json } = require('body-parser');
 router.use(express.json());
 const moment = require('moment');
@@ -14,8 +16,6 @@ router.get('/',(req,res)=>{
     });
     
 router.put('/',async(req,res,next) => {
-   // const {error} = validate_attendance(req.body);
-    //if(error) return res.status(400).send(error.details[0].message);
    
     const id = req.body.id;
     const user = await userModel.findOne({id: id});
@@ -23,31 +23,52 @@ router.put('/',async(req,res,next) => {
         return res.status(400).send('user is not in database!');
     }
     
- //bygeeb a5r sign in
- const latest_att_entry = await attendaceModel.findOne({id: id}).sort({ createdAt: -1 }).limit(1);
- if(latest_att_entry){
+ const latest_att_entry = await attendaceModel.findOne({id: id}).sort({ createdAt: -1 }).limit(1); //bygeeb a5r sign in
+
+
+ if(latest_att_entry){ //not first attendance entry in db?
     console.log("true1")
     const latest_att_entry_date = await moment(latest_att_entry.Date,"MM/DD/YYYY");
     console.log(latest_att_entry_date.date());
     console.log(moment().date());
    
+    const today = moment(Date.now());
 
- if( latest_att_entry_date.isAfter(moment()) ){
-    console.log("true2")
 
-    const new_att=new attendaceModel({
-        id:req.body.id,
-    });
-    new_att.att_data.push({ signed_In: 'true' });
+       if( today.diff(latest_att_entry_date,'months') >= 0 && today.diff(latest_att_entry_date,'days') > 0){// first attendance entry today 
+       // console.log("true_month")
 
-    new_att.arr_top=new_att.arr_top+1;
-    const saved_att=await new_att.save();
+        
+          console.log("true2")
 
-    return res.json(new_att);
-}else{
+          const new_att=new attendaceModel({
+          id:req.body.id,
+          });
+          new_att.att_data.push({ signed_In: 'true' });
+
+          new_att.arr_top=new_att.arr_top+1;
+          const saved_att=await new_att.save();
+
+          return res.json(new_att);
+        
+          
+        }else{//not first entry today
+    
+           //check if the last signed in check true or false 
+           if(latest_att_entry.att_data.pop().signed_In){
+            return res.send("two consective signed ins");
+
+            }else{//still to test 
+                latest_att_entry.att_data.push({ signed_In: 'true' });
  
-    return res.send("on the same day");
-         }
+               // let doc = await attendaceModel.findOneAndUpdate({id: id}, {arr_top:latest_att_entry.arr_top+1});
+                latest_att_entry.arr_top=latest_att_entry.arr_top+1;
+                const saveduser=await latest_att_entry.save();
+  
+                return res.json(latest_att_entry);
+  
+}
+}
 }
 
  // first attendance entry
