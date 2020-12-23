@@ -67,7 +67,7 @@ router.put('/',async(req,res,next) => {
  
               latest_att_entry.arr_top=latest_att_entry.arr_top+1;
               latest_att_entry.minutes_spent=mins_spent;
-              latest_att_entry.monthly_minutes_spent=latest_att_entry.monthly_minutes_spent+latest_att_entry.minutes_spent
+              latest_att_entry.daily_minutes_spent=latest_att_entry.daily_minutes_spent+latest_att_entry.minutes_spent
 
               const saveduser=await latest_att_entry.save();
 
