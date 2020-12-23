@@ -8,7 +8,7 @@ require('dotenv').config()
 const moment = require('moment');
 
 
-router.route('/').put(async(req, res) => {
+router.route('/').post(async(req, res) => {
 const id = req.body.id;
 let user = await userModel.find({id: id});
 
@@ -16,7 +16,6 @@ if(req.body.password){
    const salt = await bcrypt.genSalt(10);
    req.body.password = await bcrypt.hash(req.body.password, salt);
    let update=req.body.password;
-   console.log(req.body.password)
    try{
    let doc = await userModel.findOneAndUpdate({id: id}, {password:update});
 }catch(err){

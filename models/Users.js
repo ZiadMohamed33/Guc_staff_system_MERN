@@ -1,5 +1,9 @@
 const mongoose=require('mongoose');
 const { scheduleSchema } = require('./schedule');
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
+
+
 
 const UserSchema=mongoose.Schema({
         name: {
@@ -7,7 +11,7 @@ const UserSchema=mongoose.Schema({
         }, password: {
         type: String
         }, email: {
-        type: String, required: true, lowercase: true
+        type: String, required: true, lowercase: true ,unique : true
         }, role: {
         type: Boolean, required: true,
         }, age:  {
@@ -16,6 +20,8 @@ const UserSchema=mongoose.Schema({
         type: String, required: true, unique: true
         }, gender:{
         type: String, required: true, enum:['Female','Male']
+        },day_off : {
+        type: String
         }, annual_leaves : {
         type: Number, min: 0, default: 0
         },accidental_leaves : {
@@ -29,4 +35,20 @@ const UserSchema=mongoose.Schema({
 });
 
 
+function validateUsers(Users){
+        const schema = Joi.object({
+            id: Joi.string().required(),
+            name: Joi.string().required(),
+            email: Joi.string().required(),
+            role: Joi.boolean().required(),
+            gender: Joi.string().required(),
+
+
+
+        });
+        return schema.validate(Users);
+    }
+    
+    
 module.exports=mongoose.model("Users",UserSchema);
+module.exports.validateUsers = validateUsers;
