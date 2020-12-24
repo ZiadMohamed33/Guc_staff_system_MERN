@@ -16,15 +16,20 @@ require('dotenv').config()
         //check if user is hr
         const id = req.body.id
         const user = await userModel.findOne({id:id});
+        const deanidmongo =await userModel.findOne({id:req.body.deanid})
+        const vdeanidmongo =await userModel.findOne({id:req.body.vicedeanid})
+        console.log(user.role)
         if(user.role){
             const newfaculty = new faculty({
                 name : req.body.name,
-                deanId : req.body.deanId,
-                viceDeanId : req.body.viceDeanId
+                deanId : deanidmongo._id,
+                viceDeanId : deanidmongo._id
             })
             try{
+                console.log('a7a')
+                const last = await faculty.find().sort( [['_id', -1]] ).limit(1)
                 const savedfaculty=await newfaculty.save();
-                res.json(savedfaculty);    
+                res.json(last);    
                 
                 }catch(err){
                  res.json({message:err});
