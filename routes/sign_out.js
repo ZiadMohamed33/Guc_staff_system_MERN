@@ -23,7 +23,7 @@ router.put('/',async(req,res,next) => {
         return res.status(400).send('user is not in database!');
     }
     
- const latest_att_entry = await attendaceModel.findOne({id: id}).sort({ createdAt: -1 }).limit(1); //bygeeb a5r sign in
+ const latest_att_entry = await attendaceModel.findOne({id: id}).sort([["_id",-1]]).limit(1); //bygeeb a5r sign in
 
 
  if(latest_att_entry){ // first attendance entry in db?
@@ -35,7 +35,7 @@ router.put('/',async(req,res,next) => {
     const today = moment(Date.now());
         
 
-       if( today.diff(latest_att_entry_date,'months') >= 0 && today.diff(latest_att_entry_date,'days') > 0){// first attendance entry today 
+       if( today.diff(latest_att_entry_date,'months') > 0 && today.diff(latest_att_entry_date,'days') > 0){// first attendance entry today 
        // console.log("true_month")
        console.log("true2")
 
