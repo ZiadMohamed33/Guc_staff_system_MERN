@@ -1,16 +1,15 @@
 const express=require('express');
 const router = express.Router();
-const userModel=require('../models/Users');
 const bcrypt = require('bcrypt');
 //jwt
 const jwt=require('jsonwebtoken');
-const Users = require('../models/Users');
+const {User} = require('../models/Users');
 router.use(express.json());
 require('dotenv').config()
 //check login page status
 
 router.get('/test',auth_Token,async(req,res)=>{
-    const user = await userModel.findOne({email: req.user.name});
+    const user = await User.findOne({email: req.user.name});
 res.json(user)
     
     //res.send("login page");
@@ -37,7 +36,7 @@ res.json(user)
         }
     
     
-        const user = await userModel.findOne({email: email});
+        const user = await User.findOne({email: email});
         if(!user)
         {
             return res.status(400).send("Invalid email or Password");
@@ -48,18 +47,20 @@ res.json(user)
         return res.status(400).send('Invalid email or Password');
         }
         else{
-        if(req.body.password = "123456"){
-            res.redirect('./reset_password.js')
-        }else{res.json("correct sign in")}
+            if(req.body.password === "123456"){
+                res.redirect('./reset_password.js')
+            }
+            else{
+                const token = user.generateAuthToken();
+                res.send(token);
+            }
+        }
     
     
-    }
-    
-    const token = jwt.sign({id: user.id, email:user.email,role: user.role}, process.env.ACCESS_TOKEN_SECRET);
    // res.header('token', token).send(token);
     //res.json({accessToken:token});
  
-   // res.send('Logged In!');
+//    res.send(token);
    })
  
 

@@ -2,22 +2,23 @@ const mongoose=require('mongoose');
 const { scheduleSchema } = require('./schedule');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
-
+const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 
 const UserSchema=mongoose.Schema({
         name: {
-        type: String, minlength: 4, maxlength: 30
+        type: String, minlength: 4, maxlength: 30, required: true
         }, password: {
-        type: String
+        type: String, required: true, minlength: 8, maxlength: 1024
         }, email: {
-        type: String, required: true, lowercase: true ,unique : true
+        type: String, required: true ,unique : true
         }, role: {
         type: Boolean, required: true,
         }, age:  {
         type: Number, min: 18, max: 90 
         }, id:{
-        type: String, required: true, unique: true
+        type: String, unique: true
         }, gender:{
         type: String, required: true, enum:['Female','Male']
         },day_off : {
@@ -34,10 +35,14 @@ const UserSchema=mongoose.Schema({
        
 });
 
+UserSchema.methods.generateAuthToken = function (){
+    const token = jwt.sign({id: this.id, email:this.email,role: this.role}, process.env.ACCESS_TOKEN_SECRET);
+    return token;
+}
 
 function validateUsers(Users){
         const schema = Joi.object({
-            id: Joi.string().required(),
+            id: Joi.string(),
             name: Joi.string().required(),
             email: Joi.string().required(),
             role: Joi.boolean().required(),
@@ -49,6 +54,7 @@ function validateUsers(Users){
         return schema.validate(Users);
     }
     
-    
-module.exports=mongoose.model("Users",UserSchema);
+const User = mongoose.model("Users",UserSchema);
+
+module.exports.User = User;
 module.exports.validateUsers = validateUsers;
