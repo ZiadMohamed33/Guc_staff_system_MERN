@@ -68,9 +68,11 @@ router.route('/add_signin').post(async(req, res) => {
     if(user.role && id!=req.body.memberid){
         const new_att=new attendaceModel({
             id:req.body.memberid,
+            Date : req.body.Date,
+            month: req.body.month
+
         });
         new_att.att_data.push({ signed_In: 'true' });
-        new_att.arr_top=new_att.arr_top+1;
         const saved_att=await new_att.save();
     
        return res.json(new_att);
@@ -84,9 +86,9 @@ router.route('/add_signout').post(async(req, res) => {
     if(user.role && id!=req.body.memberid){
         const new_att=new attendaceModel({
             id:req.body.memberid,
+            Date : req.body.Date
         });
         new_att.att_data.push({ signed_In: 'false' });
-        new_att.arr_top=new_att.arr_top+1;
         const saved_att=await new_att.save();
     
        return res.json(new_att);

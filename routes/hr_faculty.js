@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 //jwt
 const jwt=require('jsonwebtoken');
 const Users = require('../models/Users');
-const { findOne } = require('../models/Users');
 router.use(express.json());
 require('dotenv').config()
 
@@ -26,10 +25,9 @@ require('dotenv').config()
                 viceDeanId : deanidmongo._id
             })
             try{
-                console.log('a7a')
-                const last = await faculty.find().sort( [['_id', -1]] ).limit(1)
+            
                 const savedfaculty=await newfaculty.save();
-                res.json(last);    
+                res.json(savedfaculty);    
                 
                 }catch(err){
                  res.json({message:err});

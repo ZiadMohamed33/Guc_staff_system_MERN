@@ -13,7 +13,7 @@ const departmentSchema = new mongoose.Schema({
     HODiD: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users',
-        required: true
+        required : true
     }
 });
 

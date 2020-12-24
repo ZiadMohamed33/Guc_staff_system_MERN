@@ -65,6 +65,9 @@ app.use('/hr_course',hr_course);
 const hr_rest = require('./routes/hr_rest');
 app.use('/hr_rest',hr_rest);
 
+const HOD_instructor = require('./routes/HOD_instructor');
+app.use('/HOD_instructor',HOD_instructor);
+
 //check server status
 app.get('/',(req,res)=>{
    res.json("We are online");

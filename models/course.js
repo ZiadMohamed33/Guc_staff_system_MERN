@@ -13,14 +13,12 @@ const coursesSchema = new mongoose.Schema({
     },
     instructor: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users',
-        required: true
+        ref: 'Users'
     }],
     teachingAssistant : [{
         TA : {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Users',
-            required: true
+            ref: 'Users'
         },
         isCoordinator : Boolean
     }]

@@ -2,6 +2,7 @@ const express=require('express');
 const router = express.Router();
 const userModel=require('../models/Users');
 const department = require('../models/department')
+const facultymodel = require('../models/faculty')
 const bcrypt = require('bcrypt');
 //jwt
 const jwt=require('jsonwebtoken');
@@ -16,11 +17,13 @@ require('dotenv').config()
         //check if user is hr
         const id = req.body.id
         const user = await userModel.findOne({id:id});
+        const hod = await userModel.findOne({id:req.body.HODiD})
+        const faculty = await facultymodel.findOne({name:req.body.facultyname })
         if(user.role){
             const newdepartment = new department({
                 name : req.body.name,
-                facultyId : req.body.facultyId,
-                HODiD : req.body.HODiD
+                facultyId : faculty._id,
+                HODiD:hod._id
             })
             try{
                 const saveddepartment=await newdepartment.save();
@@ -47,7 +50,8 @@ require('dotenv').config()
              await department.findOneAndUpdate({name : req.body.name},{facultyId : req.body.facultyId});
             }
             if (req.body.HODiD){
-             await department.findOneAndUpdate({name : req.body.name},{HODiD : req.body.HODiD});
+                const hod = await userModel.findOne({id:req.body.HODiD})
+             await department.findOneAndUpdate({name : req.body.name},{HODiD : hod._id});
                 }
         try{
             
