@@ -31,7 +31,8 @@ router.put('/',async(req,res,next) => {
     const latest_att_entry_date = await moment(latest_att_entry.Date,"MM/DD/YYYY");
     console.log(latest_att_entry_date.date());
     console.log(moment().date());
-   
+    var month = latest_att_entry_date.format('M');
+
     const today = moment(Date.now());
 
 
@@ -40,15 +41,14 @@ router.put('/',async(req,res,next) => {
 
         
           console.log("true2")
-
           const new_att=new attendaceModel({
           id:req.body.id,
           });
           new_att.att_data.push({ signed_In: 'true' });
-
           new_att.arr_top=new_att.arr_top+1;
+          console.log(month)
+          new_att.month=month
           const saved_att=await new_att.save();
-
           return res.json(new_att);
         
           
@@ -63,6 +63,8 @@ router.put('/',async(req,res,next) => {
  
                // let doc = await attendaceModel.findOneAndUpdate({id: id}, {arr_top:latest_att_entry.arr_top+1});
                 latest_att_entry.arr_top=latest_att_entry.arr_top+1;
+                latest_att_entry.month=month
+
                 const saveduser=await latest_att_entry.save();
   
                 return res.json(latest_att_entry);
@@ -73,13 +75,19 @@ router.put('/',async(req,res,next) => {
 
  // first attendance entry
  if (!latest_att_entry  ){
-    console.log("true3")
+    const today = moment(Date.now());
+    var month = today.format('M');
+
+
+    console.log("month")
 
     const new_att=new attendaceModel({
         id:req.body.id,
     });
     new_att.att_data.push({ signed_In: 'true' });
-    new_att.arr_top=new_att.arr_top+1;
+    new_att.arr_top=new_att.arr_top+1;  
+    new_att.month=month;
+
     const saved_att=await new_att.save();
 
    return res.json(new_att);

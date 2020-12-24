@@ -12,10 +12,11 @@ const att_data = mongoose.Schema( {
 const attendance = mongoose.Schema({
     id:{type: String, required: true,ref: 'Users'},
     Date: { type: Date, default: Date.now },
+    month: { type: Number, default: 0 },
     arr_top:{type:Number , default: "0"},
     att_data:[att_data],
     minutes_spent: {type:Number , default: "0"},
-    monthly_minutes_spent : {type:Number , default: "0"}
+    daily_minutes_spent : {type:Number , default: "0"}
 });
 
 
